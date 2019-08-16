@@ -1,5 +1,5 @@
 
-# elastic-job-lite-spring-boot-starter
+# elasticjob-lite-spring-boot-starter
 spring boot starter for Elastic-Job(https://github.com/elasticjob/elastic-job)
 
 ### setup 1
@@ -7,7 +7,7 @@ spring boot starter for Elastic-Job(https://github.com/elasticjob/elastic-job)
 ```java
 <dependency>
     <groupId>com.github.kuhn-he</groupId>
-    <artifactId>elastic-job-lite-spring-boot-starter</artifactId>
+    <artifactId>elasticjob-lite-spring-boot-starter</artifactId>
     <version>2.1.53</version>
 </dependency>
 ```
@@ -15,8 +15,8 @@ spring boot starter for Elastic-Job(https://github.com/elasticjob/elastic-job)
 ***setting up application.properties***
 ```
 #elastic-job
-elaticjob.zookeeper.server-lists=127.0.0.1:2181
-elaticjob.zookeeper.namespace=my-project
+spring.elaticjob.zookeeper.server-lists=127.0.0.1:2181
+spring.elaticjob.zookeeper.namespace=my-project
 ```
 ### setup 3
 ***define job class***

@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,13 +23,13 @@ import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 import com.dangdang.elasticjob.lite.annotation.ElasticSimpleJob;
 
 @Configuration
-@ConditionalOnExpression("'${elaticjob.zookeeper.server-lists}'.length() > 0")
+@ConditionalOnExpression("'${spring.elaticjob.zookeeper.server-lists}'.length() > 0")
 public class ElasticJobAutoConfiguration {
 
-	@Value("${elaticjob.zookeeper.server-lists}")
+	@Value("${spring.elaticjob.zookeeper.server-lists}")
 	private String serverList;
 	
-	@Value("${elaticjob.zookeeper.namespace}")
+	@Value("${spring.elaticjob.zookeeper.namespace}")
 	private String namespace;
 	
 	@Autowired

@@ -1,147 +1,121 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.kuhn-he</groupId>
-	<artifactId>elastic-job-lite-spring-boot-starter</artifactId>
+	<groupId>com.renheng.elasticjob</groupId>
+	<artifactId>elasticjob-lite-spring-boot-starter</artifactId>
 	<version>2.1.53</version>
 	<packaging>jar</packaging>
 
-	<name>elastic-job-lite-spring-boot-starter</name>
+	<name>elasticjob-lite-spring-boot-starter</name>
 	<description>spring boot starter for Elastic-Job(https://github.com/elasticjob/elastic-job)</description>
-	<url>https://github.com/kuhn-he/elastic-job-lite-spring-boot-starter</url>
-
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<name>kuhn_he</name>
-			<email>kuhn_he@163.com</email>
-		</developer>
-	</developers>
-
-	<scm>
-		<connection>
-            scm:git@github.com:kuhn-he/elastic-job-lite-spring-boot-starter.git
-        </connection>
-		<developerConnection>
-            scm:git@github.com:kuhn-he/elastic-job-lite-spring-boot-starter.git
-        </developerConnection>
-		<url>https://github.com/kuhn-he/elastic-job-lite-spring-boot-starter</url>
-	</scm>
-
+	<url>https://github.com/Leeyns/elasticjob-lite-spring-boot-starter</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<elastic-job-lite-version>2.1.5</elastic-job-lite-version>
+		<maven-compiler-plugin-version>3.7.0</maven-compiler-plugin-version>
+		<maven-source-plugin-version>3.0.1</maven-source-plugin-version>
+		<maven-surefire-plugin-version>2.9</maven-surefire-plugin-version>
+		<maven-deploy-plugin-version>2.8.2</maven-deploy-plugin-version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
-			<version>1.4.2.RELEASE</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
-			<version>1.4.2.RELEASE</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.dangdang</groupId>
 			<artifactId>elastic-job-lite-core</artifactId>
-			<version>2.1.5</version>
+			<version>${elastic-job-lite-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.dangdang</groupId>
 			<artifactId>elastic-job-lite-spring</artifactId>
-			<version>2.1.5</version>
+			<version>${elastic-job-lite-version}</version>
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	<distributionManagement>
+		<repository>
+			<id>renheng_nexus</id>
+			<name>RenHeng Release</name>
+			<url>http://132.232.26.93:9134/nexus/content/repositories/renheng_release/</url>
+		</repository>
+		<snapshotRepository>
+			<id>renheng_nexus</id>
+			<name>RenHeng Snapshots</name>
+			<url>http://132.232.26.93:9134/nexus/content/repositories/renheng_snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.1.4.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
 				<plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>oss</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-				</snapshotRepository>
-				<repository>
-					<id>oss</id>
-					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-			</distributionManagement>
-		</profile>
-	</profiles>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin-version}</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin-version}</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+
+				<!-- maven deploy plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
